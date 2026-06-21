@@ -25,7 +25,7 @@ xh1=xx1/suo
 xh2=xx2/suo
 #%%
 A=c下一代储层计算()
-yc1=A.m总程序(xh1,dt=1,grla=10**-6)
+yc1=A.m总程序(xh1,dt=1,grla=10**-6.5)
 print(vpt(yc1[100:],xh2,0.5))
 
 #%% md
@@ -59,7 +59,7 @@ for ii in range(Sm):
         if ww1[ii,jj]>0.01:
             zz.append(jj)
     cc.append(zz)
-dLt,dt,start,qstart,grla,n=3,1,80,100,10**-7,1000
+dLt,dt,start,qstart,grla,n=3,1,80,100,10**-6.5,1000
 
 线性项个数=dLt*3
 非线性项个数1=int((线性项个数+1)*线性项个数/2)

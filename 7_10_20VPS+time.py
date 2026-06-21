@@ -17,15 +17,15 @@ from zxgj1.llz import clllz1
 vpt = Vpt.vpt3
 plt.rcParams.update({'font.size': 6.5})
 # #----数据生成7振子
-# xx = np.load('data/llzc7.npz')
-# ww1_original, yy = xx['arr_0'], xx['arr_1'][::2]
+xx = np.load('data/llzc7.npz')
+ww1_original, yy = xx['arr_0'], xx['arr_1'][::2]
 # #----数据生成10振子
 # xx = np.load('data/llzc10.npz')
 # ww1_original, yy = xx['arr_0'], xx['arr_1'][::2]
 
 # ----------------------------- 数据加载 ---------------------------------
-xx = np.load('data/llzc20.npz')
-ww1_original, yy = xx['arr_0'], xx['arr_1'][::2]
+# xx = np.load('data/llzc20.npz')
+# ww1_original, yy = xx['arr_0'], xx['arr_1'][::2]
 xx1 = yy[1000:15000]
 xx2 = yy[15000:20000]
 suo = np.ceil(np.max(xx1) + 1)
