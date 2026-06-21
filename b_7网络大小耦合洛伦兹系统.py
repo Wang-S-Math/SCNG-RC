@@ -25,10 +25,9 @@ xh1=xx1/suo
 xh2=xx2/suo
 #%%
 A=c下一代储层计算()
-yc1=A.m总程序(xh1,dt=1,grla=1e-6)
+yc1=A.m总程序(xh1,dt=1,grla=10**-6)
 print(vpt(yc1[100:],xh2,0.5))
-figure(1)
-plot(yc1[:,::3])
+
 #%% md
 # ### 单独下一代储层计算
 #%%
@@ -46,17 +45,7 @@ alwhen=10**alzhishu
 qstart=100
 vpt12=[]
 yc=zeros((2100,3*Sm))
-for alw in alwhen:
-    for ii in range(Sm):
-        qxx=xh1gai[ii][qstart+1:]
-        qRR=A[ii].RR[qstart:-1]
-        rrr=A[ii].RR[-1].copy()
-        wout=A[ii].qiujie(qxx,qRR,alw) 
-        wout1=A[ii].out1
-        yc[:,ii*3:(ii+1)*3]=A[ii].yuce(rrr,wout,2000)
-    af=vpt(yc[100:,:],xh2,0.5)
-    vpt12.append(af)
-    print(alw,' ',A[ii].wu.max(0),af)
+
 #%% md
 # ### 改进下一代储层计算
 #%%
@@ -70,7 +59,7 @@ for ii in range(Sm):
         if ww1[ii,jj]>0.01:
             zz.append(jj)
     cc.append(zz)
-dLt,dt,start,qstart,grla,n=3,1,80,100,1e-6,1000
+dLt,dt,start,qstart,grla,n=3,1,80,100,10**-7,1000
 
 线性项个数=dLt*3
 非线性项个数1=int((线性项个数+1)*线性项个数/2)
@@ -196,7 +185,7 @@ def hutu(lwth):
     ax4.set_xlabel('t',labelpad=0)
 
     ax2.set_ylabel(r'$x_i(t)$',labelpad=-2.5)
-    ax3.set_ylabel(r'$x_i(t)$',labelpad=-2.5)
+    ax3.set_ylabel(r'$x_i(t)$',labelpad=3)
     ax4.set_ylabel(r'$x_i(t)$',labelpad=-2.5)
 
     ax2.set_title("(b)",loc='left',fontsize=7.5,pad=0,x=-0.05,y=0.95)
@@ -271,11 +260,13 @@ def hutu11(lwth):
 
     # ax2.set_xlabel('t',labelpad=0)
     ax4.set_xlabel('t',labelpad=0)
-
-
+    ax2.set_yticks([-15,0,15])
+    ax4.set_yticks([-10,0,10])
+#     ax2.set_ylim(-23,26)
     ax2.set_ylabel(r'$y_1(t)$',labelpad=-2.5)
-    ax3.set_ylabel(r'$z_1(t)$',labelpad=-2.5)
+    ax3.set_ylabel(r'$z_1(t)$',labelpad=3)
     ax4.set_ylabel(r'$x_2(t)$',labelpad=-2.5)
+
     ax1.set_title("(a)",loc='left',fontsize=7.5,pad=0,x=-0.1,y=0.95)
     ax2.set_title("(b)",loc='left',fontsize=7.5,pad=0,x=-0.1,y=0.95)
     ax3.set_title("(c)",loc='left',fontsize=7.5,pad=0,x=-0.1,y=0.95)
@@ -300,6 +291,7 @@ def hutu11(lwth):
 #%%
 fig=hutu(1)
 fig=hutu11(0.5)
+# fig.savefig('fig7_t.pdf',format='pdf', dpi=300, bbox_inches='tight')
 #%%
 wucha1=np.abs(yc1[100:1100,:]*suo-xx2[:1000,:])
 wucha2=np.abs(yc2[100:1100,:]*suo-xx2[:1000,:])
@@ -342,3 +334,4 @@ cbar = fig.colorbar(im,ax=axs,pad=0.02)
 axs[0].text(2,l2-0.15*l2,'NG-RC',color='purple',fontsize=7.5)
 axs[1].text(2,l2-0.15*l2,'ING-RC',color='purple',fontsize=7.5)
 axs[2].text(2,l2-0.15*l2,'SCNG-RC',color='purple',fontsize=7.5)
+plt.show( bbox_inches='tight')
